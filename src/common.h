@@ -9,4 +9,5 @@
 #include <string.h>
 #include <strings.h>
 #include <errno.h>
+#include <argp.h>
 #endif

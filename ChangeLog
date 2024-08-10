@@ -1,3 +1,11 @@
+commit eb5f22f81df95e58b7d185b7f10fea759f2d14bd
+Author: mb6ockatf <mdddmmmm@yandex.ru>
+Date:   Sat Aug 10 22:45:20 2024 +0300
+
+    feat(formatting): number padding
+    
+    first table column with number -- give it a correct padding so the whole thing looks better
+
 commit c1e235bce90e551ec8f7b39e1538354c4ee677bd
 Author: mb6ockatf <mdddmmmm@yandex.ru>
 Date:   Sat Aug 10 20:52:40 2024 +0300
