@@ -7,10 +7,25 @@ const char * SQUARE_SYMBOL   = "   □    |";
 const char * TRIANGLE_SYMBOL = "   △    |";
 const char * PLACEHOLDER     = "        |";
 
-void proceed_line(unsigned short int current_number)
+uint8_t number_length_get(unsigned int number)
+{
+	uint8_t counter = 0;
+	while (number >= 10){
+		number /= 10;
+		counter++;
+	}
+	return counter;
+
+}
+
+void proceed_line(unsigned short int current_number, uint8_t limit_length)
 {
 	char line[80] = "";
+	uint8_t pad_length = limit_length - number_length_get(current_number);
 	sprintf(line + strlen(line), "%hu", current_number);
+	for (int j = 0; j < pad_length; j++){
+		sprintf(line + strlen(line), "%c", ' ');
+	}
 	if (is_square(current_number))
 		sprintf(line + strlen(line), "%s", SQUARE_SYMBOL);
 	else sprintf(line + strlen(line), "%s", PLACEHOLDER);
