@@ -23,9 +23,10 @@ void proceed_line(unsigned short int current_number, uint8_t limit_length)
 	char line[80] = "";
 	uint8_t pad_length = limit_length - number_length_get(current_number);
 	sprintf(line + strlen(line), "%hu", current_number);
-	for (int j = 0; j < pad_length; j++){
-		sprintf(line + strlen(line), "%c", ' ');
-	}
+	 /* for (int j = 0; j < pad_length; j++){ */
+		/* sprintf(line + strlen(line), "%*c", pad_length, ' '); */
+	/* } */
+	sprintf(line + strlen(line), "%-*s", pad_length, "");
 	if (is_square(current_number))
 		sprintf(line + strlen(line), "%s", SQUARE_SYMBOL);
 	else sprintf(line + strlen(line), "%s", PLACEHOLDER);
