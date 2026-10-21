@@ -1,0 +1,51 @@
+# ci.yml - build numbers on every push and pull request.
+#
+# Copyright (C) 2026 mb6ockatf
+# This file is free software; see COPYING for copying conditions.
+#
+# The job runs in the official gcc:16.2-trixie image.  It does not run
+# 'make distcheck': the clean-local rule in Makefile.am needs astyle and
+# fails in the empty VPATH build directory, and the headers in src/ are
+# not listed in numbers_SOURCES, so they are missing from the tarball.
+
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-24.04
+    container: gcc:16.2-trixie
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install dependencies
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends autoconf automake libgmp-dev
+      - name: Show the compiler
+        run: gcc --version
+      - name: Bootstrap
+        run: autoreconf -fi
+      - name: Configure
+        run: ./configure
+      - name: Build
+        run: make -j"$(nproc)"
+      - name: Upload config.log
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: config-log
+          path: config.log
+          if-no-files-found: ignore
