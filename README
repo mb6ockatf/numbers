@@ -1,1 +1,28 @@
-c program that outputs numbers and their parameters
+numbers -- output numbers and their parameters
+==============================================
+
+numbers is a C program that outputs numbers and their parameters.
+Options limit the output to prime, triangular, odd, even, square or
+perfect numbers.
+
+Building and installing
+-----------------------
+
+    autoreconf -i     # only when building from the repository
+    ./configure
+    make
+
+See INSTALL for generic instructions.
+
+Reporting bugs
+--------------
+
+Report bugs to <mdddmmmm@yandex.ru>.
+
+Copying
+-------
+
+Copyright (C) 2024 mb6ockatf
+
+numbers is released under the GNU Affero General Public License,
+version 3; see COPYING.
